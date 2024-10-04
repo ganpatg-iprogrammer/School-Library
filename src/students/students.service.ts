@@ -13,6 +13,7 @@ export class StudentsService {
     private studentRepository: Repository<Student>,
   ) {}
 
+  //get book assigned history of student
   async getStudentHistory(@Param('studentId') studentId: number) {
     return await this.bookIssueRepository.find({
       where: { student: { id: studentId } },
