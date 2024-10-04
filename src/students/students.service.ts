@@ -14,10 +14,23 @@ export class StudentsService {
   ) {}
 
   //get book assigned history of student
-  async getStudentHistory(@Param('studentId') studentId: number) {
+  async getStudentHistory(
+    @Param('studentId') studentId: number,
+  ): Promise<BookIssueRecord[]> {
     return await this.bookIssueRepository.find({
       where: { student: { id: studentId } },
       relations: ['book'],
     });
+  }
+
+  async getStudentBookDashboard(): Promise<BookIssueRecord[]> {
+    return await this.bookIssueRepository
+      .createQueryBuilder('issue')
+      .select('student.id', 'studentId')
+      .addSelect('COUNT(issue.id)', 'bookCount')
+      .addSelect('SUM(issue.fine)', 'totalFine')
+      .leftJoin('issue.student', 'student')
+      .groupBy('student.id')
+      .getRawMany();
   }
 }

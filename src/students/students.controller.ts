@@ -12,4 +12,9 @@ export class StudentsController {
   ): Promise<BookIssueRecord[]> {
     return this.studentService.getStudentHistory(studentId);
   }
+
+  @Get('get-student-book-dashboard')
+  async getStudentBookDashboard(): Promise<BookIssueRecord[]> {
+    return this.studentService.getStudentBookDashboard();
+  }
 }
