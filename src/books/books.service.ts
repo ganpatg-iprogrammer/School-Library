@@ -8,7 +8,7 @@ import { IssueBookDto } from './dto/issue-book.dto';
 import { BookIssueRecord } from './book-issue-record.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Student } from 'src/students/student.entity';
+import { Student } from '../students/student.entity';
 import { Book } from './book.entity';
 
 @Injectable()
